@@ -47,30 +47,38 @@ class PatientForm extends Component {
         const data = `{"name": "${this.state.name}", "email": "${this.state.email}", "phoneNumber": "${this.state.phoneNumber}"}`;
         this.sendPostRequest(data);
         this.props.history.push('/all');
-        this.forceUpdate();
+        this.render();
     }
 
     render () {
         return (
             <div>
                 <center>
-                <h1>Add a new Patient record.</h1>
+                <h1 className="text-info display-4">Add a new Patient record.</h1>
                 <hr/>
                 <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="name">Name: </label>  
-                        <input type="text" name="name" value={this.state.name} onChange={this.handleNameChange} required/>
+                <div className="col-md-8">
+                    <div className="form-group row">
+                        <label htmlFor="name" className="col-sm-2 col-form-label">Name: </label>  
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" name="name" value={this.state.name} onChange={this.handleNameChange} required placeholder="Enter name"/>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Email:</label>
-                        <input type="text" name="email" value={this.state.email} onChange={this.handleEmailChange} required/>
+                    <div className="form-group row">
+                        <label htmlFor="email" className="col-sm-2 col-form-label">Email:</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" name="email" value={this.state.email} onChange={this.handleEmailChange} required placeholder="Enter email"/>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="phoneNumber">Phone Number:</label>
-                        <input type="text" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handlePhoneNumberChange} required/>
+                    <div className="form-group row">
+                        <label htmlFor="phoneNumber" className="col-sm-2 col-form-label">Phone Number:</label>
+                        <div className="col-sm-10">
+                            <input type="text" className="form-control" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handlePhoneNumberChange} required placeholder="Enter a phone number"/>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <input type="submit" value="Submit"/>
+                    </div>
+                    <div className="form-group col-lg-1">
+                        <input type="submit" className="form-control bg-info text-white" value="Submit"/>
                     </div>
                 </form>
                 </center>
