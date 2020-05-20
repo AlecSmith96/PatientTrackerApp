@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import './PatientForm.css';
 
 class PatientForm extends Component {
     constructor(props) {
@@ -77,7 +78,7 @@ class PatientForm extends Component {
                         </div>
                     </div>
                     </div>
-                    <div className="form-group col-lg-1">
+                    <div id="submitButton" className="form-group col-lg-1">
                         <input type="submit" className="form-control bg-info text-white" value="Submit"/>
                     </div>
                 </form>
