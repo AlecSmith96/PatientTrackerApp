@@ -61,13 +61,13 @@ class PatientForm extends Component {
                     <div className="form-group row">
                         <label htmlFor="name" className="col-sm-2 col-form-label">Name: </label>  
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" name="name" value={this.state.name} onChange={this.handleNameChange} required placeholder="Enter name"/>
+                            <input type="text" className="form-control" name="name" value={this.state.name} onChange={this.handleNameChange} required placeholder="Enter full name"/>
                         </div>
                     </div>
                     <div className="form-group row">
                         <label htmlFor="email" className="col-sm-2 col-form-label">Email:</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" name="email" value={this.state.email} onChange={this.handleEmailChange} required placeholder="Enter email"/>
+                            <input type="email" className="form-control" name="email" value={this.state.email} onChange={this.handleEmailChange} required placeholder="Enter email"/>
                         </div>
                     </div>
                     <div className="form-group row">
