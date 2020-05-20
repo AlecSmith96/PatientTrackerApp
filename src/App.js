@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import PatientsList from './components/PatientsList';
+import PatientForm from './components/PatientForm';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends Component {
 
-export default App;
+  render () {
+    return (
+      // https://www.codingame.com/playgrounds/6517/react-router-tutorial
+      <Router>
+      <div>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <ul className="navbar-nav mr-auto">
+          <li><Link to={'/all'} className="nav-link">Patient List</Link></li>
+          <li><Link to={'/add'} className="nav-link">Add Patient Record</Link></li>
+        </ul>
+        </nav>
+        <hr />
+        <Switch>
+            <Route exact path='/all' component={PatientsList} />
+            <Route path='/add' component={PatientForm} />
+        </Switch>
+      </div>
+    </Router>
+    )
+  }
+};
+
+export default App
