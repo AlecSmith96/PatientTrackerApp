@@ -27,10 +27,7 @@ class PatientForm extends Component {
         this.setState({phoneNumber: event.target.value})
     }
 
-    handleSubmit(event) {
-        const data = `{"name": "${this.state.name}", "email": "${this.state.email}", "phoneNumber": "${this.state.phoneNumber}"}`;
-        console.log(data);
-        
+    sendPostRequest(data) {
         fetch('http://192.168.1.197:8080/patients/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -40,6 +37,17 @@ class PatientForm extends Component {
         }).catch(function(error) {
             alert('An error occured, please try again');
         });
+    }
+
+    /**
+     * Submits form data to REST service and navigates back to PatientsList component.
+     * @param {*} event 
+     */
+    handleSubmit(event) {
+        const data = `{"name": "${this.state.name}", "email": "${this.state.email}", "phoneNumber": "${this.state.phoneNumber}"}`;
+        this.sendPostRequest(data);
+        this.props.history.push('/all');
+        this.forceUpdate();
     }
 
     render () {
