@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PatientDetails from'./PatientDetails';
 import './PatientsList.css';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 class PatientsList extends Component {
   state = {
@@ -8,7 +9,7 @@ class PatientsList extends Component {
   }
 
   componentDidMount() {
-    fetch('http://192.168.1.197:8080/patients/all')
+    fetch('http://localhost:8080/patients/all')
     .then(res => res.json())
     .then((data) => {
       this.setState({ patients: data })
@@ -22,23 +23,19 @@ class PatientsList extends Component {
     )
   }
 
-  showPatientDetails(patient) {
-    //this.props.history.push(`/${patient.name}/${patient.email}`);
-  }
-
   render () {
     return (
       <div>
         <center><h1 className="text-info display-4">Patients List</h1></center>
         {this.state.patients.map((patient) => (
           <div key={patient.name+patient.email} className="card">
-            <a href={this.showPatientDetails(patient)} className="button bg-light stretched-link">
-              <div className="card-body ">
+            <Link to={{pathname: `/details/${patient.name}/${patient.email}`, query:'/all'}} className="button bg-light stretched-link" style={{ textDecoration: 'none' }}>
+              <div className="card-body text-info">
                 <h5 className="card-title">{patient.name}</h5>
                 <h6 className="card-subtitle mb-2 text-muted">{patient.email}</h6>
                 <p className="card-text">{patient.phoneNumber}</p>
               </div>
-            </a>
+            </Link>
           </div>
         ))}
       </div>

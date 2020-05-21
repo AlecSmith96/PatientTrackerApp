@@ -9,15 +9,14 @@ class App extends Component {
 
   render () {
     return (
-      // https://www.codingame.com/playgrounds/6517/react-router-tutorial
       <Router>
       <div>
       <Navbar bg="light" expand="lg">
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="all">Patient List</Nav.Link>
-            <Nav.Link href="add">Add Patient Record</Nav.Link>
+            <Nav.Link href="/all">Patient List</Nav.Link>
+            <Nav.Link href="/add">Add Patient Record</Nav.Link>
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Patient Search" className="mr-sm-2" />
@@ -28,7 +27,7 @@ class App extends Component {
       <Switch>
           <Route exact path='/all' component={PatientsList} />
           <Route path='/add' component={PatientForm} />
-          <Route path='/${name}/${emal}' component={PatientDetails} />
+          <Route path='/details/:name/:email' component={PatientDetails} />
       </Switch>
       </div>
     </Router>

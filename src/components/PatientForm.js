@@ -29,7 +29,7 @@ class PatientForm extends Component {
     }
 
     sendPostRequest(data) {
-        fetch('http://192.168.1.197:8080/patients/add', {
+        fetch('http://localhost:8080/patients/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: data,
