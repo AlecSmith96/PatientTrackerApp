@@ -2,15 +2,18 @@ import React, {Component} from 'react';
 import './PatientDetails.css';
 import './react-confirm-alert.css';
 import { confirmAlert } from 'react-confirm-alert';
-import { Overlay, Card } from 'react-bootstrap';
+import { Overlay, Card, Modal } from 'react-bootstrap';
 
 class PatientDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
             patient: {},
-            deletePopupVisible: false
+            deletePopupVisible: false,
+            showModal: false
         }
+
+        this.dischargePatient = this.dischargePatient.bind(this);
     }
 
     componentDidMount () {
@@ -18,7 +21,6 @@ class PatientDetails extends Component {
         fetch(`http://localhost:8080/patients/${name}`)
         .then(res => res.json())
         .then((patientToDisplay) => {
-            console.log('Patient: '+patientToDisplay);
             this.setState(() => ({ patient: patientToDisplay }))
         })
     }
@@ -40,14 +42,19 @@ class PatientDetails extends Component {
         })
       };
 
-    // toggleOverlay(comp) {
-    //     const newState = comp.deletePopupVisible ? 'false' : 'true';
-    //     comp.setState({deletePopupVisible: newState});
-    // }
+    dischargePatient(patient) {
+        fetch(`http://localhost:8080/patients/discharge/${patient.name}`, {method: 'POST'})
+        this.props.history.push('/all');
+        this.render();
+    }
 
-    // handleClickDelete() {
+    showModal = () => {
+        this.setState({ showModal: true });
+    };
 
-    // }
+    hideModal = () => {
+        this.setState({ showModal: false });
+    };
 
     render() {
         return (
@@ -65,28 +72,28 @@ class PatientDetails extends Component {
                     {/* <Button variant="primary">Go somewhere</Button> */}
                 </Card.Body>
                 <Card.Footer className="text-muted">
-                <center>
-                    <div id="dischargeButton" className="form-group col-lg-1">
-                        <button onClick={this.submit} className="form-control bg-danger text-white">Discharge Patient</button>
+                    <div id="dischargeButton" className="btn col-lg-1">
+                        <button onClick={this.showModal} className="form-control bg-danger text-white">Discharge Patient</button>
                     </div>
-                </center>
                 </Card.Footer>
                 </Card>
                 </div>
-                {/* <Overlay isVisible={this.state.deletePopupVisible} onBackdropPress={this.toggleOverlay(this)}>
-                <div className='custom-ui'>
-                    <h1>Are you sure?</h1>
-                    <p>You want to delete this file?</p>
-                    <button onClick={this.toggleOverlay(this)}>No</button>
-                    <button onClick={() => {
-                        this.handleClickDelete()
-                    }}>Yes, Delete it!</button>
-                </div>
-                </Overlay> */}
+                <Modal show={this.state.showModal} onHide={this.hideModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Discharge Patient?</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Discharging patient will remove all records from the database.</Modal.Body>
+                <Modal.Footer>
+                <button variant="secondary" className="btn bg-info text-white" onClick={this.hideModal}>Close</button>
+                <button variant="primary" className="btn bg-danger text-white" onClick={() => this.dischargePatient(this.state.patient)}>Discharge</button>
+                </Modal.Footer>
+                </Modal>
             </center>
         </div>
         )
     }
 }
+const container = document.createElement("div");
+document.body.appendChild(container);
 
 export default PatientDetails;
