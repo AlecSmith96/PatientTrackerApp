@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './PatientDetails.css';
 import './react-confirm-alert.css';
 import { confirmAlert } from 'react-confirm-alert';
-import { Overlay, Card, Modal } from 'react-bootstrap';
+import { Overlay, Card, Modal, Button } from 'react-bootstrap';
 
 class PatientDetails extends Component {
     constructor(props) {
@@ -62,19 +62,28 @@ class PatientDetails extends Component {
             <center>
                 <br/>
                 <div className="col-lg-8">
-                <Card className="text-center">
-                <Card.Header><h1 className="text-info display-4">{this.state.patient.name}</h1></Card.Header>
-                <Card.Body>
-                <Card.Title>{`Email Address: ${this.state.patient.email}`}</Card.Title>
-                    <Card.Text>
-                        {`Telephone Number: ${this.state.patient.phoneNumber}`}
-                    </Card.Text>
+                <h1 className="text-info display-4">{this.state.patient.name}</h1>
+                <Card>
+                <Card.Header className="text-center">
+                    <div id="editDetailsButton" className="btn col-lg-1">
+                        <Button variant="outline-success" onClick={this.showModal} className="form-control">Edit Details</Button>
+                    </div>
+                    <div id="AddMedicationsButton" className="btn col-lg-1">
+                        <Button variant="info" onClick={this.showModal} className="form-control">Add Medication</Button>
+                    </div>
+                    <div id="dischargeButton" className="btn col-lg-1">
+                        <Button variant="outline-danger" onClick={this.showModal} className="form-control">Discharge Patient</Button>
+                    </div>
+                </Card.Header>
+                <Card.Body className="text-left">
+                    <Card.Title>{`Triaged on: ${this.state.patient.triageDate}`}</Card.Title>
+                    <Card.Text>{`Date of Birth: ${this.state.patient.dateOfBirth}`}</Card.Text>
+                    <Card.Text>{`Email Address: ${this.state.patient.email}`}</Card.Text>
+                    <Card.Text>{`Telephone Number: ${this.state.patient.phoneNumber}`}</Card.Text>
                     {/* <Button variant="primary">Go somewhere</Button> */}
                 </Card.Body>
                 <Card.Footer className="text-muted">
-                    <div id="dischargeButton" className="btn col-lg-1">
-                        <button onClick={this.showModal} className="form-control bg-danger text-white">Discharge Patient</button>
-                    </div>
+                    
                 </Card.Footer>
                 </Card>
                 </div>

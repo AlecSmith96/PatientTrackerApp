@@ -1,3 +1,11 @@
 #dischargeButton {
     min-width: 180px;
   }
+
+#editDetailsButton {
+  min-width: 130px;
+}
+
+#AddMedicationsButton {
+  min-width: 170px;
+}
