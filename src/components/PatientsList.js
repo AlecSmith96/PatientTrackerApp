@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PatientDetails from'./PatientDetails';
 import './PatientsList.css';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class PatientsList extends Component {
   state = {

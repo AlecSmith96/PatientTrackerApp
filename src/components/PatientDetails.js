@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import './PatientDetails.css';
 import './react-confirm-alert.css';
 import { confirmAlert } from 'react-confirm-alert';
-import { Overlay, Card, Modal, Button } from 'react-bootstrap';
+import { Card, Modal, Button } from 'react-bootstrap';
+import AllergiesList from './AllergiesList';
 
 class PatientDetails extends Component {
     constructor(props) {
@@ -19,9 +20,6 @@ class PatientDetails extends Component {
 
     componentDidMount () {
         const { _id } = this.props.match.params;
-        const {allergies } = this.props.match.params;
-        console.log('ID: ' + _id);
-        console.log('ALLERGIES: ' + allergies);
         fetch(`http://localhost:8080/patients/${_id}`)
         .then(res => res.json())
         .then((patientToDisplay) => {
@@ -87,18 +85,10 @@ class PatientDetails extends Component {
                     <Card.Text>{`Date of Birth: ${this.state.patient.dateOfBirth}`}</Card.Text>
                     <Card.Text>{`Email Address: ${this.state.patient.email}`}</Card.Text>
                     <Card.Text>{`Telephone Number: ${this.state.patient.phoneNumber}`}</Card.Text>
-                    {/* <Button variant="primary">Go somewhere</Button> */}
+                    <AllergiesList allergies={this.state.allergies}/>
                 </Card.Body>
                 <Card.Footer className="text-muted">
-                    <Card.Title>Allergies:</Card.Title>
-                    {
-                    this.state.allergies.map((allergy) => (
-                        <div key={allergy.description} className="card">
-                            <div className="card-body text-info">
-                                <h5 className="card-title">{allergy}</h5>
-                            </div>
-                        </div>
-                    ))}
+                
                 </Card.Footer>
                 </Card>
                 </div>

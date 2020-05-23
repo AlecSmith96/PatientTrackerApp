@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PatientsList from './components/PatientsList';
 import PatientForm from './components/PatientForm';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PatientDetails from './components/PatientDetails';
 import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
 
