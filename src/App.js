@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PatientsList from './components/PatientsList';
 import PatientForm from './components/PatientForm';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import PatientDetails from './components/PatientDetails';
 import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap';
 
@@ -26,6 +26,7 @@ class App extends Component {
       </Navbar>
       <Switch>
           <Route exact path='/all' component={PatientsList} />
+          <Redirect from="/" to="/all" exact />
           <Route path='/add' component={PatientForm} />
           <Route path='/details/:_id' component={PatientDetails} />
       </Switch>
