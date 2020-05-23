@@ -37,14 +37,20 @@ class PatientForm extends Component {
         this.setState({dateOfBirth: event.target.value})
     }
 
+    handleResponse = res => {
+        if(res.ok) {
+            alert('New patient added!');
+        }
+    }
+
     sendPostRequest(data) {
         fetch('http://localhost:8080/patients/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: data,
-        }).then(function(response) {
-            alert('New patient added!');
-        }).catch(function(error) {
+        })
+        .then(this.handleResponse)
+        .catch(function(error) {
             alert('An error occured, please try again');
         });
     }

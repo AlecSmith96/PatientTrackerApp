@@ -10,18 +10,25 @@ class PatientDetails extends Component {
         this.state = {
             patient: {},
             deletePopupVisible: false,
-            showModal: false
+            showModal: false,
+            allergies: []
         }
 
         this.dischargePatient = this.dischargePatient.bind(this);
     }
 
     componentDidMount () {
-        const { name } = this.props.match.params;
-        fetch(`http://localhost:8080/patients/${name}`)
+        const { _id } = this.props.match.params;
+        const {allergies } = this.props.match.params;
+        console.log('ID: ' + _id);
+        console.log('ALLERGIES: ' + allergies);
+        fetch(`http://localhost:8080/patients/${_id}`)
         .then(res => res.json())
         .then((patientToDisplay) => {
-            this.setState(() => ({ patient: patientToDisplay }))
+            this.setState(() => ({ 
+                patient: patientToDisplay,
+                allergies: patientToDisplay.allergies
+             }))
         })
     }
 
@@ -43,7 +50,7 @@ class PatientDetails extends Component {
       };
 
     dischargePatient(patient) {
-        fetch(`http://localhost:8080/patients/discharge/${patient.name}`, {method: 'POST'})
+        fetch(`http://localhost:8080/patients/discharge/${patient._id}`, {method: 'POST'})
         this.props.history.push('/all');
         this.render();
     }
@@ -83,7 +90,15 @@ class PatientDetails extends Component {
                     {/* <Button variant="primary">Go somewhere</Button> */}
                 </Card.Body>
                 <Card.Footer className="text-muted">
-                    
+                    <Card.Title>Allergies:</Card.Title>
+                    {
+                    this.state.allergies.map((allergy) => (
+                        <div key={allergy.description} className="card">
+                            <div className="card-body text-info">
+                                <h5 className="card-title">{allergy}</h5>
+                            </div>
+                        </div>
+                    ))}
                 </Card.Footer>
                 </Card>
                 </div>

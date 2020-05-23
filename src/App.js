@@ -27,7 +27,7 @@ class App extends Component {
       <Switch>
           <Route exact path='/all' component={PatientsList} />
           <Route path='/add' component={PatientForm} />
-          <Route path='/details/:name/:email' component={PatientDetails} />
+          <Route path='/details/:_id' component={PatientDetails} />
       </Switch>
       </div>
     </Router>
