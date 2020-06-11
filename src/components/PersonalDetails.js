@@ -2,14 +2,6 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import AllergiesList from './AllergiesList';
 
-const handleSubmit = (data) => {
-    // console.log(JSON.stringify(this.state.allergies));
-    //     const data = `{"name": "${this.state.name}", "email": "${this.state.email}", "phoneNumber": "${this.state.phoneNumber}", "dateOfBirth": "${this.state.dateOfBirth}", "allergies": ${JSON.stringify(this.state.allergies)}}`;
-    //     this.sendPostRequest(data);
-    //     this.props.history.push('/all');
-    //     this.render();
-}
-
 /**
  * Component for displaying the personal details of a patient in the PatientDetails component. 
  * Checks if details need to be changed and renders form to do so depending on the editDetails prop.
@@ -20,7 +12,7 @@ const PersonalDetails = (props) => {
         return (
             <div>
                 <Card.Title>{`Triaged on: ${props.patient.triageDate}`}</Card.Title>
-                <form onSubmit="handleSubmit">
+                <form>
                     <div className="form-group row">
                         <label htmlFor="email" className="col-sm-2 col-form-label text-left">Email:</label>
                         <div className="col-sm-10">

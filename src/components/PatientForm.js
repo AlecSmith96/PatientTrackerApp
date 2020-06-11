@@ -74,7 +74,6 @@ class PatientForm extends Component {
      * @param {*} event 
      */
     handleSubmit(event) {
-        console.log(JSON.stringify(this.state.allergies));
         const data = `{"name": "${this.state.name}", "email": "${this.state.email}", "phoneNumber": "${this.state.phoneNumber}", "dateOfBirth": "${this.state.dateOfBirth}", "allergies": ${JSON.stringify(this.state.allergies)}}`;
         this.sendPostRequest(data);
         this.props.history.push('/all');

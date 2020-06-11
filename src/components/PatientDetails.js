@@ -67,13 +67,21 @@ class PatientDetails extends Component {
     } 
 
     sendUpdateRequest(data) {
-
+        fetch(`http://localhost:8080/patients/update/${this.state.patient._id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: data,
+        })
+        .then(this.handleResponse)
+        .catch(function(error) {
+            alert('An error occured, please try again');
+        });
+        this.props.history.push('/all');
+        this.render();
     }
 
     saveChanges = () => {
-        console.log(JSON.stringify(this.state.allergies));
         const data = `{"name": "${this.state.name}", "email": "${this.state.email}", "phoneNumber": "${this.state.phoneNumber}", "dateOfBirth": "${this.state.dateOfBirth}", "allergies": ${JSON.stringify(this.state.allergies)}}`;
-        console.log(data);
         this.sendUpdateRequest(data);
         this.props.history.push('/all');
         this.render();
